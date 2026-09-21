@@ -19,18 +19,15 @@ public class SaludoController {
 
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST
-            );
+                    HttpStatus.BAD_REQUEST);
         }
         if (!StringValidator.tieneMayuscula(nombre)) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST
-            );
+                    HttpStatus.BAD_REQUEST);
         }
         if (!SpaceValidator.tieneEspacios(nombre)) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST
-            );
+                    HttpStatus.BAD_REQUEST);
         }
         return "Hola, " + nombre + ".";
     }
@@ -40,14 +37,14 @@ public class SaludoController {
             @RequestParam(name = "estado", defaultValue = "todas") String estado,
             @RequestParam(name = "pagina", defaultValue = "1") int pagina) {
 
-            if ((estado == "todas"|| estado == "abiertas" || estado == "cerradas") && pagina < 1) {
-                throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST
-                );
-            }
+        if ((estado == "todas" || estado == "abiertas" || estado == "cerradas") && pagina < 1) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST);
+        }
 
         return "Buscando incidencias con estado " + estado + ", página " + pagina;
     }
+
     @GetMapping("/informes")
     public String informes(
             @RequestParam(name = "desde") LocalDate desde,
@@ -56,4 +53,5 @@ public class SaludoController {
         return "Desde " + desde + " (día " + desde.getDayOfMonth()
                 + " del mes " + desde.getMonthValue() + "), activo=" + activo;
     }
+
 }

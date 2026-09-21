@@ -1,9 +1,12 @@
 package com.raul.prueba.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,21 +16,26 @@ import com.raul.prueba.model.Proyecto;
 @RequestMapping("/proyectos")
 public class ProyectoController {
 
-    @GetMapping("/{id}/incidencias")
-    public String detalleProyectoTodasIcidencias(@PathVariable(name = "id") int id) {
-        return "Incidencias del proyecto " + id;
-    }
+    private final List<Proyecto> proyectos = new ArrayList<>();
 
     @GetMapping
     public List<Proyecto> lista() {
-        return List.of(
-                new Proyecto(1, "Proyecto 1", "Descripción del proyecto 1", 5),
-                new Proyecto(2, "Proyecto 2", "Descripción del proyecto 2", 3));
+        return proyectos;
     }
 
     @GetMapping("/{id}")
-    public List<Proyecto> Json(@PathVariable(name = "id") int id) {
-        return List.of(
-                new Proyecto(id, "Proyecto 1", "Descripción del proyecto 1", (int) (Math.random() * 10) + 1));
+    public Proyecto detalle(@PathVariable(name = "id") int id) {
+        for (Proyecto proyecto : proyectos) {
+            if (proyecto.getId() == id) {
+                return proyecto;
+            }
+        }
+        return null;
+    }
+
+    @PostMapping
+    public Proyecto crear(@RequestBody Proyecto proyecto) {
+        proyectos.add(proyecto);
+        return proyecto;
     }
 }
