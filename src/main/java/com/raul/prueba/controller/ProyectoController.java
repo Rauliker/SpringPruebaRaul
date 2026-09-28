@@ -47,7 +47,7 @@ public class ProyectoController {
         return null;
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public Proyecto crear(@RequestBody Proyecto proyecto) {
         proyecto.setId(siguienteId);
         siguienteId = siguienteId + 1;

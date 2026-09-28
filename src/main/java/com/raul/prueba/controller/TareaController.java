@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,11 +53,19 @@ public class TareaController {
         return new Tarea(1, "Revisar el login", "alta", false);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public Tarea crear(@RequestBody Tarea tarea) {
         tarea.setId(siguienteId);
         siguienteId = siguienteId + 1;
         tareas.add(tarea);
+        return tarea;
+    }
+
+    @PostMapping("/espejo")
+    public Tarea espejo(@RequestBody Tarea tarea) {
+        System.out.println("He recibido: " + tarea.getTitulo()
+                + " / " + tarea.getPrioridad()
+                + " / completada=" + tarea.isCompletada());
         return tarea;
     }
 
@@ -78,6 +87,14 @@ public class TareaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable(name = "id") int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
+    }
+
+    @GetMapping("/diagnostico")
+    public String diagnostico(
+            @RequestHeader(name = "User-Agent") String cliente,
+            @RequestHeader(name = "Accept") String acepta) {
+
+        return "Me llama: " + cliente + "\nQuiere recibir: " + acepta;
     }
 
 }

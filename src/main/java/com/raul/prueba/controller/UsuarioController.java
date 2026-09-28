@@ -33,7 +33,7 @@ public class UsuarioController {
         return null;
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public Usuario crear(@RequestBody Usuario Usuario) {
         Usuarios.add(Usuario);
         return Usuario;
