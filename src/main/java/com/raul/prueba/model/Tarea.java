@@ -1,27 +1,26 @@
 package com.raul.prueba.model;
 
-public class Tarea {
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-    private int id;
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Tarea {
+    private Integer id;
     private String titulo;
     private String prioridad;
-    private boolean completada;
+    private Boolean completada;
+    // ID del proyecto al que pertenece la tarea
+    private Integer proyectoId;
+    private Proyecto proyecto;
 
     public Tarea() {
     }
 
-    public Tarea(int id, String titulo, String prioridad, boolean completada) {
-        this.id = id;
-        this.titulo = titulo;
-        this.prioridad = prioridad;
-        this.completada = completada;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,11 +40,27 @@ public class Tarea {
         this.prioridad = prioridad;
     }
 
-    public boolean isCompletada() {
+    public Boolean isCompletada() {
         return completada;
     }
 
-    public void setCompletada(boolean completada) {
+    public void setCompletada(Boolean completada) {
         this.completada = completada;
+    }
+
+    public Integer getProyectoId() {
+        return proyectoId;
+    }
+
+    public void setProyectoId(Integer proyectoId) {
+        this.proyectoId = proyectoId;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 }

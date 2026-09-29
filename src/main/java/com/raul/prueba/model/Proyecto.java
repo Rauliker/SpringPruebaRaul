@@ -1,55 +1,60 @@
 package com.raul.prueba.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Proyecto {
-    private int id;
+
+    private Integer id;
+
     private String nombre;
+
     private String descripcion;
-    private int numeroDeIncidencias;
-    private boolean activo;
-    private boolean required;
+
+    private Integer numeroDeIncidencias;
+
+    private Boolean activo;
+
+    private Boolean required;
+
+    private List<Tarea> tareas = new ArrayList<>();
 
     public Proyecto() {
     }
 
-    public Proyecto(int id, String nombre, String descripcion, int numeroDeIncidencias, boolean activo,
-            boolean required) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.numeroDeIncidencias = numeroDeIncidencias;
-        this.activo = activo;
-        this.required = required;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getnombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setnombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getdescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setdescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public int isnumeroDeIncidencias() {
+    public Integer getNumeroDeIncidencias() {
         return numeroDeIncidencias;
     }
 
-    public void setnumeroDeIncidencias(int numeroDeIncidencias) {
+    public void setNumeroDeIncidencias(Integer numeroDeIncidencias) {
         this.numeroDeIncidencias = numeroDeIncidencias;
     }
 
@@ -57,15 +62,23 @@ public class Proyecto {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
-    public boolean isRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
-    public void setRequired(boolean required) {
+    public void setRequired(Boolean required) {
         this.required = required;
+    }
+
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
     }
 }
